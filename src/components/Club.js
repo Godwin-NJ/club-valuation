@@ -1,18 +1,19 @@
 import React from 'react'
-import clubData from '../data'
 import {connect} from 'react-redux' 
 import { AiOutlineCaretUp,AiOutlineCaretDown } from "react-icons/ai";
 
 
 const Club = ({increase,decrease,remove,clubNumber,clubsValuation,clubInfo}) => {
+
+
     return (
     <main>
             <p>CLUB SECTION</p>
             <h2>single-club [{clubNumber}] </h2>
     
         <div>
-            {clubData.map((club) => {
-                const{id,name,value,img,founded,legends} = club
+            {clubInfo.map((club) => {
+                const{id,name,value,img,founded,legends,amount} = club
                 const legend = legends.map((legend) => legend)
                 const legendArr = legend.join(',')
                
@@ -28,26 +29,27 @@ const Club = ({increase,decrease,remove,clubNumber,clubsValuation,clubInfo}) => 
                         </div>
                         <div>
                             <span onClick={() => increase()}><AiOutlineCaretUp /></span>
-                                    <br/>
+                               <h2>{amount}</h2> <br/>
                             <span onClick={() => decrease()}><AiOutlineCaretDown /></span>
-                            
                         </div>
                     </section>
                 )
             })}
         </div>
 
-        <h2>total[{clubsValuation}]</h2>
+        <h2>Total Valuation [{clubsValuation}]</h2>
            
     </main>
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch,ownProps) => {
+        const{id,amount} = ownProps
+        console.log(ownProps)
     return {
-        increase : () => dispatch({type:'INCREASE'}),
-        decrease : () => dispatch({type:'DECREASE'}),
-        remove : () => dispatch({type:'DECREASE'})
+        increase : () => dispatch({type:'INCREASE', payload:{id}}),
+        decrease : () => dispatch({type:'DECREASE' , payload:{id,amount}}),
+        remove : () => dispatch({type:'REMOVE', payload:{id}})
     }
 }
 

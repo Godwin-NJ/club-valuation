@@ -3,11 +3,28 @@
 function reducer(state,action) {
 
     if(action.type === 'DECREASE'){
-        console.log('decrease')
+        let tempClub = []
+
+        tempClub = state.clubInfo.map((club) => {
+            // console.log(club)
+            if(club.id === action.payload.id){
+                club = {...club , amount : club.amount - 1}
+            }
+            return club
+        })
+
+        return{...state, clubInfo:tempClub}
     }
 
     if(action.type === 'INCREASE'){
-        console.log('increase')
+       let tempClub = state.clubInfo.map((club) => {
+            if(club.id === action.payload.id){
+                club = {...club , amount : club.amount + 1}
+            }
+            return club
+        })
+
+        return{ ...state, clubInfo : tempClub}
     }
 
     if(action.type === 'REMOVE'){
