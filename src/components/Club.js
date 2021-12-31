@@ -2,11 +2,19 @@ import React,{useEffect} from 'react'
 import {connect} from 'react-redux' 
 import SingleClub from './singleClub'
 
-const Club = ({clubNumber,clubsValuation,clubInfo,dispatch}) => {
+const Club = ({clubNumber,clubsValuation,clubInfo=[],dispatch}) => {
 
     useEffect(() => {
         dispatch({type: "GET_TOTAL"})
     },[clubInfo,dispatch])
+
+    if(clubInfo.length === 0){
+        return(
+            <div>
+                <h2>Elite clubs are empty, Kindly refresh</h2>
+            </div>
+        )
+    }
 
     return (
     <main>
