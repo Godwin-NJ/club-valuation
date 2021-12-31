@@ -20,7 +20,14 @@ const singleClub = ({increase,decrease,remove,name,value,img,founded,legends,amo
             <div>
                 <span onClick={() => increase()}><AiOutlineCaretUp /></span>
                     <h2>{amount}</h2> <br/>
-                <span onClick={() => decrease()}><AiOutlineCaretDown /></span>
+                <span onClick={() => {
+                    if(amount === 1){
+                      return  remove()
+                    }else{
+                        return decrease()
+                    }
+                }}><AiOutlineCaretDown /></span>
+                {/* <span onClick={() => decrease()}><AiOutlineCaretDown /></span> */}
             </div>
         </section>
     )
@@ -28,7 +35,7 @@ const singleClub = ({increase,decrease,remove,name,value,img,founded,legends,amo
 
 const mapDispatchToProps = (dispatch,ownProps) => {
         const{id,amount} = ownProps
-        console.log(ownProps)
+        // console.log(ownProps)
     return {
         increase : () => dispatch({type:'INCREASE', payload:{id}}),
         decrease : () => dispatch({type:'DECREASE' , payload:{id,amount}}),

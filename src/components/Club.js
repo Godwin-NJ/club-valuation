@@ -1,9 +1,12 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {connect} from 'react-redux' 
 import SingleClub from './singleClub'
 
-const Club = ({clubNumber,clubsValuation,clubInfo}) => {
+const Club = ({clubNumber,clubsValuation,clubInfo,dispatch}) => {
 
+    useEffect(() => {
+        dispatch({type: "GET_TOTAL"})
+    },[clubInfo,dispatch])
 
     return (
     <main>
@@ -16,32 +19,6 @@ const Club = ({clubNumber,clubsValuation,clubInfo}) => {
                 })}
             </article>
     
-        {/* <div>
-            {clubInfo.map((club) => {
-                const{id,name,value,img,founded,legends,amount} = club
-                const legend = legends.map((legend) => legend)
-                const legendArr = legend.join(',')
-               
-                return(
-                    <section key={id} className='club'>
-                        <div>
-                            <p>{name}</p>
-                            <p>${value} Billion</p>
-                            <p>{legendArr}</p>
-                            <p>{img}</p>
-                            <p>{founded}</p>
-                            <button onClick={() => remove()}>remove</button>
-                        </div>
-                        <div>
-                            <span onClick={() => increase()}><AiOutlineCaretUp /></span>
-                               <h2>{amount}</h2> <br/>
-                            <span onClick={() => decrease()}><AiOutlineCaretDown /></span>
-                        </div>
-                    </section>
-                )
-            })}
-        </div> */}
-
         <h2>Total Valuation [{clubsValuation}]</h2>
            
     </main>
