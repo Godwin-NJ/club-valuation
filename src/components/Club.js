@@ -1,17 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux' 
-import { AiOutlineCaretUp,AiOutlineCaretDown } from "react-icons/ai";
+import SingleClub from './singleClub'
 
-
-const Club = ({increase,decrease,remove,clubNumber,clubsValuation,clubInfo}) => {
+const Club = ({clubNumber,clubsValuation,clubInfo}) => {
 
 
     return (
     <main>
             <p>CLUB SECTION</p>
             <h2>single-club [{clubNumber}] </h2>
+
+            <article>
+                {clubInfo.map((club) => {
+                    return <SingleClub key={club.id} {...club}/>
+                })}
+            </article>
     
-        <div>
+        {/* <div>
             {clubInfo.map((club) => {
                 const{id,name,value,img,founded,legends,amount} = club
                 const legend = legends.map((legend) => legend)
@@ -35,7 +40,7 @@ const Club = ({increase,decrease,remove,clubNumber,clubsValuation,clubInfo}) => 
                     </section>
                 )
             })}
-        </div>
+        </div> */}
 
         <h2>Total Valuation [{clubsValuation}]</h2>
            
@@ -43,22 +48,13 @@ const Club = ({increase,decrease,remove,clubNumber,clubsValuation,clubInfo}) => 
     )
 }
 
-const mapDispatchToProps = (dispatch,ownProps) => {
-        const{id,amount} = ownProps
-        console.log(ownProps)
-    return {
-        increase : () => dispatch({type:'INCREASE', payload:{id}}),
-        decrease : () => dispatch({type:'DECREASE' , payload:{id,amount}}),
-        remove : () => dispatch({type:'REMOVE', payload:{id}})
-    }
-}
 
 const mapStateToProps = (store) => {
     const{clubNumber,clubsValuation,clubInfo} = store
     return{clubNumber,clubsValuation,clubInfo}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Club)
+export default connect(mapStateToProps)(Club)
 
 
 
