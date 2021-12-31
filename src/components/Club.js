@@ -8,6 +8,8 @@ const Club = ({clubNumber,clubsValuation,clubInfo=[],dispatch}) => {
         dispatch({type: "GET_TOTAL"})
     },[clubInfo,dispatch])
 
+    const clubsValuationToString = clubsValuation.toLocaleString()
+
     if(clubInfo.length === 0){
         return(
             <div>
@@ -27,7 +29,7 @@ const Club = ({clubNumber,clubsValuation,clubInfo=[],dispatch}) => {
                 })}
             </article>
     
-        <h2>Total Valuation [{clubsValuation}]</h2>
+        <h2>Total Valuation [{clubsValuationToString}]</h2>
            
     </main>
     )

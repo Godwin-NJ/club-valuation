@@ -7,11 +7,13 @@ const singleClub = ({increase,decrease,remove,name,value,img,founded,legends,amo
     const legend = legends.map((legend) => legend)
     const legendArr = legend.join(',')
 
+    const valueString = value.toLocaleString()
+
     return (
         <section className='club'>
             <div>
                 <p>{name}</p>
-                <p>${value} Billion</p>
+                <p>${valueString} </p>
                 <p>{legendArr}</p>
                 <p>{img}</p>
                 <p>{founded}</p>
